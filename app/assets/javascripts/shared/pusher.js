@@ -11,11 +11,9 @@ WMP.Pusher = {
 
 	connect: function() {
 		
-		this.pusher = new Pusher(PUSHER_CONFIG.APP_KEY, { authEndpoint: "/game/auth?player_name=" + player_name });
+		this.pusher = new Pusher(PUSHER_CONFIG.APP_KEY, { authEndpoint: "/game/auth?player_id=" + player_id });
 
 		this.pusher.connection.bind('connected', function () {
-	        WMP.Pusher.socketId = WMP.Pusher.pusher.connection.socket_id;
-	        WMP.Pusher.playerId = WMP.Pusher.socketId.replace(".", "");
 	        console.log("Player ID: " + WMP.Pusher.playerId);
 	    });
 

@@ -4,6 +4,7 @@ class CreateGames < ActiveRecord::Migration
       t.string :name
       t.boolean :finished
       t.boolean :started
+      t.integer :current_player
 
       t.timestamps
     end

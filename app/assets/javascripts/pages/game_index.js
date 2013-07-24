@@ -20,15 +20,19 @@ $(function() {
 
 	$('#drawing').hide();
   	$('#watching').hide();
+  	$('#scores').hide();
 
-  	// Setup guess button
-	$('#guess-btn').click(function() {
+  	$('#guess-btn').click(function() {
 		var guessVal = $('#guess').val();
 
 		if(guessVal != '')
 		{
-			WMP.Drawing.submitGuess(guessVal);
+			WMP.Game.submitGuess(guessVal);
 		}
+	});
+
+	$('#new-round-btn').click(function() {
+		WMP.Game.triggerNewRound();
 	});
 
 });

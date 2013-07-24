@@ -16,7 +16,14 @@ class HomeController < ApplicationController
 			game.finished = false
 			game.save
 
+			player = GamePlayer.new
+			player.game_id = game.id
+			player.name = params[:player_name]
+			player.score = 0
+			player.save
+
 			session[:game_id] = game.id
+			session[:player_id] = player.id
 			session[:player_name] = params[:player_name]
 
 			redirect_to game_url(:is_creator => 1)
@@ -30,8 +37,15 @@ class HomeController < ApplicationController
 
 		if Game.check_can_join params[:game_name]
 			game = Game.find_by_name params[:game_name]
+
+			player = GamePlayer.new
+			player.game_id = game.id
+			player.name = params[:player_name]
+			player.score = 0
+			player.save
 			
 			session[:game_id] = game.id
+			session[:player_id] = player.id
 			session[:player_name] = params[:player_name]
 
 			redirect_to game_url

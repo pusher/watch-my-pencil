@@ -70,25 +70,5 @@ WMP.Drawing = {
 			ctx.stroke();
 		}
 	  
-	},
-
-	setupDrawListener: function()
-	{
-		WMP.Pusher.drawUpdatesChannel.bind('client-new-coordinates', function(data) {
-			WMP.Drawing.drawPath(data);
-		});
-	},
-
-	setupGuessListener: function()
-	{
-		WMP.Pusher.guessesChannel.bind('client-new-guess', function(data) {
-			console.log('New guess: ' + data.guess);
-			$('#guesses').append('<p>' + data.guess + '<input type="button" value="Yes"></input></p>')
-		});
-	},
-
-	submitGuess: function(guess)
-	{
-		WMP.Pusher.guessesChannel.trigger('client-new-guess', { guess: guess });
 	}
 };

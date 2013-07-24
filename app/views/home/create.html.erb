@@ -7,6 +7,10 @@
 	</div><!-- /header -->
 
 	<div data-role="content">
+		<% if notice %>
+		    <p id="notice"><%= notice %></p> 
+		<% end %>
+
 		<h2>Create a game</h2>	
 		<%= form_tag("create_action", method: "post") do %>
           <%= label_tag(:game_name, "Game name:") %>

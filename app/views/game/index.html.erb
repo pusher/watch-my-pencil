@@ -19,7 +19,7 @@
 	<div id="drawing">
 		<h2>Drawing</h2>
 		<div id="guesses">
-			<h3>Guesses</h3>
+			<ul id="player-guesses"></ul>
 		</div>
 		<canvas id="drawArea" width="200" height="100"></canvas>
 	</div>
@@ -29,5 +29,13 @@
 		<p><input data-role="none" name="guess" id="guess" type="text" />
 			<input data-role="none" type="button" id="guess-btn" value="Guess" />
 		</p>
+	</div>
+	<div id="scores">
+		<h2>Scores</h2>
+		<ul id='score-list'></ul>
+		<p>
+			<input data-role="none" type="button" id="new-round-btn" value="Keep going?" />
+		</p>
+		
 	</div>
 <% end %>

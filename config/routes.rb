@@ -5,6 +5,8 @@ WatchMyPencil::Application.routes.draw do
   post "home/join_action"
   post "home/create_action"
   post "game/start"
+  post "game/endturn"
+  post "game/newround"
 
   get "game/index"
   post "game/auth"

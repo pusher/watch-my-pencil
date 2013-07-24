@@ -28,16 +28,19 @@ WMP.Game = {
 	setupTurnsListener: function()
 	{
 		WMP.Pusher.gameControlChannel.bind('new-turn', function(data) {
-		  if(WMP.Pusher.playerId == data.drawer)
+		  if(player_id == data.drawer)
 		  {
 		  	// I'm drawing
 		  	$('#joining').hide();
 		  	$('#drawing').show();
 		  	$('#watching').hide();
+		  	$('#scores').hide();
 
 		  	WMP.Drawing.resizeCanvas('#drawArea', 40);
 			WMP.Drawing.setupDrawEvents();
-		  	WMP.Drawing.setupGuessListener();
+		  	WMP.Game.setupGuessListener();
+		  	WMP.Game.setupPlayerGuessList();
+		  	WMP.Game.destroyDrawListener();
 		  }
 		  else
 		  {
@@ -45,11 +48,94 @@ WMP.Game = {
 		  	$('#joining').hide();
 		  	$('#drawing').hide();
 		  	$('#watching').show();
+		  	$('#scores').hide();
 
 		  	WMP.Drawing.resizeCanvas('#watchArea', 40);
-			WMP.Drawing.setupDrawListener();
+			WMP.Game.setupDrawListener();
+			WMP.Game.destroyGuessListener();
+
 		  }
 		});
+
+		WMP.Pusher.gameControlChannel.bind('end-round', function(data) {
+		  
+		  $('#joining').hide();
+		  $('#drawing').hide();
+		  $('#watching').hide();
+		  $('#scores').show();
+
+		  WMP.Game.destroyDrawListener();
+		  WMP.Game.destroyGuessListener();
+
+		  console.log(data);
+
+		  $('#score-list').empty();
+		
+		  for(i = 0; i < data.players.length; i++)
+		  {
+			$('#score-list').append('<li>' + data.players[i].name + ': <span id="score">' + data.players[i].score + '</span></li>');        
+		  }
+
+		});
+	},
+
+	setupDrawListener: function()
+	{
+		WMP.Pusher.drawUpdatesChannel.bind('client-new-coordinates', function(data) {
+			WMP.Drawing.drawPath(data);
+		});
+	},
+
+	destroyDrawListener: function()
+	{
+		WMP.Pusher.drawUpdatesChannel.unbind('client-new-coordinates');
+	},
+
+	setupGuessListener: function()
+	{
+		WMP.Pusher.guessesChannel.bind('client-new-guess', function(data) {
+			console.log('New guess: ' + data);
+			$('#guess-' + data.player_id).html(data.guess);
+		});
+	},
+
+	destroyGuessListener: function()
+	{
+		WMP.Pusher.guessesChannel.unbind('client-new-guess');
+	},
+
+	submitGuess: function(guess)
+	{
+		WMP.Pusher.guessesChannel.trigger('client-new-guess', { guess: guess, player_id: player_id });
+	},
+
+	setupPlayerGuessList: function()
+	{
+		$('#player-guesses').empty();
+		
+		WMP.Pusher.playersChannel.members.each(function (member) {
+			if(member.id != player_id)
+			{
+		        $('#player-guesses').append('<li>' + member.info.name + ': <span id="guess-' + member.id + '"></span><input type="button" value="Yes!" onclick="WMP.Game.guessedRight(' + member.id + ')" /></li>');        
+		    }
+	    });
+		
+	},
+
+	guessedRight: function(player_id)
+	{
+		console.log('Player guessed right! ' + player_id);
+		this.triggerNextTurn(player_id);
+	},
+
+	triggerNextTurn: function(winner_id)
+	{	
+		$.post('endturn?game_id=' + game_id + '&winner_id=' + winner_id);
+	},
+
+	triggerNewRound: function()
+	{	
+		$.post('newround?game_id=' + game_id);
 	}
 
 };
