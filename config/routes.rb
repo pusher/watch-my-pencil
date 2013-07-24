@@ -1,11 +1,18 @@
 WatchMyPencil::Application.routes.draw do
 
   get "home/index"
+  get "home/create"
+  post "home/join_action"
+  post "home/create_action"
+  post "game/start"
 
-  get "game/draw"
-  get "game/watch"
+  get "game/index"
   post "game/auth"
 
+  match 'home' => 'home#index', :as => :home
+  match 'game/joining' => 'game#joining', :as => :joining
+  match 'home/create' => 'game#create', :as => :create
+  match 'game/index' => 'game#index', :as => :game
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

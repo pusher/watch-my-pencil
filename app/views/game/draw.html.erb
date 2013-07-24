@@ -1,13 +1,18 @@
 <% content_for :head do %>
   <%= javascript_include_tag "pages/draw.js" %>
+  <%= javascript_include_tag "shared/drawing.js" %>
+  <%= javascript_include_tag "shared/pusher.js" %>
 <% end %>
 
 <% content_for :content do %>
   <div data-role="header">
-		<h1>Get Drawing!</h1>
+		<h1>Category: </h1>
 	</div><!-- /header -->
 
 	<div data-role="content">	
+		<div id="guesses">
+			<h3>Guesses</h3>
+		</div>
 		<canvas id="drawArea" width="200" height="100"></canvas>
 	</div><!-- /content -->
 <% end %>

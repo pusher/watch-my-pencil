@@ -7,18 +7,14 @@
 	</div><!-- /header -->
 
 	<div data-role="content">
-		<% if notice %>
-		    <p id="notice"><%= notice %></p> 
-		<% end %>
-
-		<h2>Join a game</h2>	
-		<%= form_tag("/home/join_action", method: "post") do %>
+		<h2>Create a game</h2>	
+		<%= form_tag("create_action", method: "post") do %>
           <%= label_tag(:game_name, "Game name:") %>
           <%= text_field_tag(:game_name) %>
           <%= label_tag(:player_name, "Your name:") %>
           <%= text_field_tag(:player_name) %>
           <%= submit_tag("Submit") %>
         <% end %>	
-		<p><%= link_to "Create a new game", :controller => "home", :action => "create" %></p>
+		<p><%= link_to "Join an existing game", :controller => "home", :action => "index" %></p>
 	</div><!-- /content -->
 <% end %>

@@ -3,3 +3,14 @@ canvas
 	background: red;
 	margin: 0;
 }
+
+.ui-content
+{
+	padding: 0 !important;
+}
+
+#guesses
+{
+	height: 200px;
+	overflow-y: scroll;
+}

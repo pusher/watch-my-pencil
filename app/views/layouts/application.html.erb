@@ -5,9 +5,17 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <%= stylesheet_link_tag    "application", :media => "all" %>
   <%= javascript_include_tag "application" %>
-  <link rel="stylesheet" href="http://code.jquery.com/mobile/1.3.1/jquery.mobile-1.3.1.min.css" />
-	<script src="http://code.jquery.com/mobile/1.3.1/jquery.mobile-1.3.1.min.js"></script>
+  <!--<link rel="stylesheet" href="http://code.jquery.com/mobile/1.3.1/jquery.mobile-1.3.1.min.css" />
+	<script src="http://code.jquery.com/mobile/1.3.1/jquery.mobile-1.3.1.min.js"></script>-->
   <script src="http://js.pusher.com/2.1/pusher.min.js"></script>
+  <script>
+    var PUSHER_CONFIG = {
+        APP_KEY: '<%= @pusher_key %>'
+      };
+
+    var player_name = '<%= session[:player_name] %>';
+    var game_id = '<%= session[:game_id] %>';
+  </script>
   <%= csrf_meta_tags %>
   <%= yield :head %>
 </head>

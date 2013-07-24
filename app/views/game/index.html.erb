@@ -1,0 +1,33 @@
+<% content_for :head do %>
+  <%= javascript_include_tag "pages/game_index.js" %>
+  <%= javascript_include_tag "shared/game.js" %>
+  <%= javascript_include_tag "shared/pusher.js" %>
+  <%= javascript_include_tag "shared/drawing.js" %>
+<% end %>
+
+<% content_for :content do %>
+	<div id="joining">	
+		<h2>Hi <%= session[:player_name] %></h2>
+		<ul id='players'></ul>
+		<% if @is_creator %>
+		    <p>Click here when everyone has joined!</p>
+		    <p><input id="start" type="button" value="Start!" /></p>
+		<% else %>
+			<p>Just sharpening the pencil!</p>
+		<% end %>
+	</div>
+	<div id="drawing">
+		<h2>Drawing</h2>
+		<div id="guesses">
+			<h3>Guesses</h3>
+		</div>
+		<canvas id="drawArea" width="200" height="100"></canvas>
+	</div>
+	<div id="watching">
+		<h2>Watching</h2>
+		<canvas id="watchArea" width="200" height="100"></canvas>
+		<p><input data-role="none" name="guess" id="guess" type="text" />
+			<input data-role="none" type="button" id="guess-btn" value="Guess" />
+		</p>
+	</div>
+<% end %>
