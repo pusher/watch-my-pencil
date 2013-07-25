@@ -1,6 +1,7 @@
 WatchMyPencil::Application.routes.draw do
 
   get "home/index"
+  get "home/test"
   get "home/create"
   post "home/join_action"
   post "home/create_action"

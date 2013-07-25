@@ -28,16 +28,17 @@ WMP.Drawing = {
 
 	setupDrawEvents: function()
 	{
-		$('#drawArea').mousedown(function (event) {
+		$('#drawArea').bind('mousedown touchstart', function (event) {
 			  inDrag = true;
 			  var ctx = $('#drawArea').get(0).getContext('2d');
-			  ctx.moveTo(event.offsetX, event.offsetY);
-			  coordinates.push([event.offsetX, event.offsetY]);
+			  var pos = WMP.Drawing.extractXY(event);
+			  ctx.moveTo(pos.x, pos.y);
+			  coordinates.push([pos.x, pos.y]);
 			  event.preventDefault();
 			  return false;
 		});
 
-		$('#drawArea').mouseup(function (event) {
+		$('#drawArea').bind('mouseup touchend', function (event) {
 		  inDrag = false;
 		  console.log("Pushing coordinates: " + coordinates);
 		  WMP.Pusher.drawUpdatesChannel.trigger('client-new-coordinates', { coordinates: coordinates });
@@ -45,13 +46,15 @@ WMP.Drawing = {
 		  return false;
 		});
 
-		$('#drawArea').bind('mousemove', function (event) {
+		$('#drawArea').bind('mousemove touchmove', function (event) {
 			if(inDrag)
 			{
 			  var ctx = $('#drawArea').get(0).getContext("2d");
-			  ctx.lineTo(event.offsetX, event.offsetY);
+			  var pos = WMP.Drawing.extractXY(event);
+
+			  ctx.lineTo(pos.x, pos.y);
 			  ctx.stroke();
-			  coordinates.push([event.offsetX, event.offsetY]);
+			  coordinates.push([pos.x, pos.y]);
 			  event.preventDefault();
 			}
 		  	return false;
@@ -70,5 +73,23 @@ WMP.Drawing = {
 			ctx.stroke();
 		}
 	  
+	},
+
+	extractXY: function(event) 
+	{
+		if(event.originalEvent.touches)
+		{
+		  	return {
+		  		x: (event.originalEvent.touches[0].pageX - event.originalEvent.touches[0].target.offsetLeft),
+		  		y: (event.originalEvent.touches[0].pageY - event.originalEvent.touches[0].target.offsetTop)
+			};
+		}
+		else
+		{
+		  	return {
+			  	x: event.offsetX,
+			  	y: event.offsetY
+			};
+		}
 	}
 };

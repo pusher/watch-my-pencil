@@ -1,5 +1,6 @@
 class Game < ActiveRecord::Base
   attr_accessible :finished, :started, :name, :current_player
+  has_many :game_players, dependent: :destroy
 
   def self.check_can_join(name)
   	game = Game.find_by_name(name)
