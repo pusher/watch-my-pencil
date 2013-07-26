@@ -1,7 +1,6 @@
 canvas
 {
-	background: red;
-	margin: 0;
+	background: #ffffcc;
 }
 
 .ui-content
@@ -9,8 +8,42 @@ canvas
 	padding: 0 !important;
 }
 
-#guesses
+#guesses h3
 {
-	height: 200px;
-	overflow-y: scroll;
+	margin: 0;
+}
+
+#guesses ul, #scores ul
+{
+	list-style-type: none;
+	display: block;
+	width: 100%;
+	margin: 0 0 12px 0;
+}
+
+#scores li
+{
+	display: block;
+	background: #ddddff;
+	margin: 4px 0;
+	padding: 1em;
+}
+
+#guesses li a
+{
+	color: black;
+	display: block;
+	background: #ddffdd;
+	margin: 4px 0;
+	padding: 1em;
+}
+
+#guesses li a:hover
+{
+	text-decoration: none;
+}
+
+#joining, #watching, #drawing, #scores
+{
+	padding: 8px;
 }

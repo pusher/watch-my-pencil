@@ -2,11 +2,9 @@
 <% end %>
 
 <% content_for :content do %>
-  <div data-role="header">
+  	<div class="well">
 		<h1>Watch my pencil!</h1>
-	</div><!-- /header -->
 
-	<div data-role="content">
 		<% if notice %>
 		    <p id="notice"><%= notice %></p> 
 		<% end %>
@@ -17,8 +15,10 @@
           <%= text_field_tag(:game_name) %>
           <%= label_tag(:player_name, "Your name:") %>
           <%= text_field_tag(:player_name) %>
-          <%= submit_tag("Submit") %>
+          <p>
+	          <%= submit_tag("Join", class: "btn btn-info") %>
+	      </p>
         <% end %>	
-		<p><%= link_to "Join an existing game", :controller => "home", :action => "index" %></p>
+		<p><%= link_to "Join an existing game?", :controller => "home", :action => "index" %></p>
 	</div><!-- /content -->
 <% end %>

@@ -1,10 +1,41 @@
 <% content_for :head do %>
   <%= javascript_include_tag "pages/test.js" %>
+  <%= javascript_include_tag "shared/game.js" %>
+  <%= javascript_include_tag "shared/pusher.js" %>
+  <%= javascript_include_tag "shared/drawing.js" %>
 <% end %>
 
 
 <% content_for :content do %>
-<div data-role="content">
-	<canvas id="drawArea" width="200" height="100"></canvas>
-</div>	
+
+<!--<div id="watching">
+	<input placeholder='Your guess...' name="guess" id="guess" type="text" style="width:96%" />
+	<canvas id="watchArea" width="200" height="100"></canvas>
+	<h3>What is that????</h3>
+</div>-->
+<!-- 
+	<div id="drawing">
+		<div id="guesses">
+			<h3>It looks like a...</h3>
+			<ul id="player-guesses">
+				<li><a href="#" onclick="alert('hello'); return false;">Washing machine</a></li>
+				<li><a href="#" onclick="alert('hello'); return false;">Wheel barrow</a></li>
+			</ul>
+		</div>
+		<canvas id="drawArea" width="200" height="100"></canvas>
+	</div> -->
+
+	<div id="scores">
+		<h2>Scores</h2>
+		<ul id='score-list'>
+			<li>Rich: <span id="score">1</span></li>
+			<li>Rich: <span id="score">1</span></li>
+			<li>Rich: <span id="score">1</span></li>
+		</ul>
+		<p>
+			<input class="btn btn-warning" type="button" id="new-round-btn" value="Keep going?" />
+		</p>
+		
+	</div>
+
 <% end %>

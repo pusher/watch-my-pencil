@@ -1,5 +1,4 @@
 var WMP = WMP || {};
-//WMP.Drawing = WMP.Drawing || {};
 
 WMP.Drawing = {
 
@@ -17,11 +16,11 @@ WMP.Drawing = {
 	    };
 	},
 
-	resizeCanvas: function(id, bottomMargin)
+	resizeCanvas: function(id, bottomMargin, padding)
 	{
 	  var dims = this.getCanvasDimensions();
 	  $(id).attr({
-	    width: dims.width,
+	    width: dims.width - padding * 2,
 	    height: dims.height - bottomMargin
 	  });
 	},

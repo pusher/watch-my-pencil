@@ -11,25 +11,29 @@
 		<ul id='players'></ul>
 		<% if @is_creator %>
 		    <p>Click here when everyone has joined!</p>
-		    <p><input id="start" type="button" value="Start!" /></p>
+		    <p><input id="start" class='btn btn-info' type="button" value="Start!" /></p>
 		<% else %>
 			<p>Just sharpening the pencil!</p>
 		<% end %>
 	</div>
+
 	<div id="drawing">
-		<h2>Drawing</h2>
+
 		<div id="guesses">
-			<ul id="player-guesses"></ul>
+			<h3>It looks like a...</h3>
+			<ul id="player-guesses">
+			</ul>
 		</div>
 		<canvas id="drawArea" width="200" height="100"></canvas>
+
 	</div>
+	
 	<div id="watching">
-		<h2>Watching</h2>
+		<input placeholder='Your guess...' name="guess" id="guess" type="text" style="width:96%" /><input type="button" id="guess-btn" value="Guess" />
 		<canvas id="watchArea" width="200" height="100"></canvas>
-		<p><input data-role="none" name="guess" id="guess" type="text" />
-			<input data-role="none" type="button" id="guess-btn" value="Guess" />
-		</p>
+		<h3>What is that????</h3>
 	</div>
+	
 	<div id="scores">
 		<h2>Scores</h2>
 		<ul id='score-list'></ul>

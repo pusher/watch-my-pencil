@@ -36,7 +36,7 @@ WMP.Game = {
 		  	$('#watching').hide();
 		  	$('#scores').hide();
 
-		  	WMP.Drawing.resizeCanvas('#drawArea', 40);
+		  	WMP.Drawing.resizeCanvas('#drawArea', 400, 8);
 			WMP.Drawing.setupDrawEvents();
 		  	WMP.Game.setupGuessListener();
 		  	WMP.Game.setupPlayerGuessList();
@@ -50,7 +50,7 @@ WMP.Game = {
 		  	$('#watching').show();
 		  	$('#scores').hide();
 
-		  	WMP.Drawing.resizeCanvas('#watchArea', 40);
+		  	WMP.Drawing.resizeCanvas('#watchArea', 400, 8);
 			WMP.Game.setupDrawListener();
 			WMP.Game.destroyGuessListener();
 
@@ -116,7 +116,7 @@ WMP.Game = {
 		WMP.Pusher.playersChannel.members.each(function (member) {
 			if(member.id != player_id)
 			{
-		        $('#player-guesses').append('<li>' + member.info.name + ': <span id="guess-' + member.id + '"></span><input type="button" value="Yes!" onclick="WMP.Game.guessedRight(' + member.id + ')" /></li>');        
+				$('#player-guesses').append('<li><a id="guess-' + member.id + '" href="#" onclick="WMP.Game.guessedRight(' + member.id + ')">...waiting for guess...</a></li>');
 		    }
 	    });
 		

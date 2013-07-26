@@ -17,8 +17,10 @@
           <%= text_field_tag(:game_name) %>
           <%= label_tag(:player_name, "Your name:") %>
           <%= text_field_tag(:player_name) %>
-          <%= submit_tag("Submit") %>
+          <p>
+	          <%= submit_tag("Join", class: "btn btn-info") %>
+	      </p>
         <% end %>	
-		<p><%= link_to "Create a new game", :controller => "home", :action => "create" %></p>
+		<p><%= link_to "Create a new game?", { :controller => "home", :action => "create" } %></p>
 	</div><!-- /content -->
 <% end %>
